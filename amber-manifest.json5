@@ -14,7 +14,7 @@
 
   // External services this agent uses
   slots: {
-    proxy: { kind: "a2a", optional: true },
+    proxy: { kind: "a2a" },
   },
 
   // Runtime configuration
