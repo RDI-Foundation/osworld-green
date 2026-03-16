@@ -1,3 +1,13 @@
+FROM ghcr.io/astral-sh/uv:python3.13-bookworm AS osworld-clone
+# Clone osworld repo.
+RUN git clone --depth=1 -b pro-wh/dev https://github.com/pro-wh/osworld-qemu.git /osworld
+
+FROM scratch AS osworld-ctx
+# Re-root the clone so its contents are at /. This stage can be overridden for
+# local development to skip the clone:
+#   docker build --build-context osworld-ctx=./osworld .
+COPY --from=osworld-clone /osworld /
+
 FROM ghcr.io/astral-sh/uv:python3.13-bookworm
 
 RUN \
@@ -24,7 +34,7 @@ RUN \
     --mount=type=cache,target=/home/agent/.cache/uv,uid=1000 \
     uv sync --locked --extra osworld
 
-COPY osworld osworld
+COPY --from=osworld-ctx / osworld
 
 COPY src src
 
