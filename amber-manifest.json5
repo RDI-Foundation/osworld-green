@@ -48,8 +48,10 @@
       observation_type: "screenshot",
       sleep_after_execution: 0.0,
       max_steps: 15,
-      domain: "osworld",
-      example_id: "example",
+      test_all_meta_name: "test_nogdrive",
+      num_workers: 3,
+      shard_index: 0,
+      num_shards: 1,
     }, // replace with your default assessment parameters, e.g. {"num_rounds": 2}
     participant_roles: ["agent"], // list the roles your green agent expects, e.g. ["pro_debater", "con_debater"]
   },
