@@ -1,5 +1,6 @@
 {
   manifest_version: "0.1.0",
+  experimental_features: ["kvm"],
 
   // TODO: Declare all config your agent needs from the deployer
   // Use secret: true for sensitive values like API keys
@@ -30,6 +31,10 @@
       // connect. Here we're putting it in an unused environment variable.
       AMBER_HINT_PROXY: "${slots.proxy}",
     },
+
+    mounts: [
+      { path: "/dev/kvm", from: "framework.kvm" },
+    ],
 
     network: {
       endpoints: [
